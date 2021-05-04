@@ -1,0 +1,8 @@
+
+The tar file include kernel source code:
+
+How to compile kernel?
+1.  Uncompress kernel.tar.gz:   Use this command  tar -zxf kernel.tar.gz 
+2.  run kernel_build.sh to compile kernel standalone
+3.  You can get kernel img:
+       out-kernel/arch/arm/boot/zImage-dtb
