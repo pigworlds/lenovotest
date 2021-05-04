@@ -1,0 +1,3 @@
+[submodule "vendor/qcom/opensource/wlan/qcacld-2.0"]
+	path = vendor/qcom/opensource/wlan/qcacld-2.0
+	url = https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-2.0/
