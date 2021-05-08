@@ -15,9 +15,17 @@ export KAFLAGS=" -mno-android"
 rm -rf ./out-kernel
 mkdir out-kernel
 
-make -j24 -C kernel/msm-3.18 O=$(pwd)/out-kernel/ msmcortex-perf_defconfig
+#make -j24 -C kernel/msm-3.18 O=$(pwd)/out-kernel/ msmcortex-perf_defconfig
+cp container-config out-kernel/.config
 make -j24 -C kernel/msm-3.18 O=$(pwd)/out-kernel/ all 2>&1 | tee build_kernel.log 
 
+echo "Building wlan.ko"
+git submodule init vendor/qcom/opensource/wlan/qcacld-2.0/
+git submodule update vendor/qcom/opensource/wlan/qcacld-2.0/
+cd vendor/qcom/opensource/wlan/qcacld-2.0
+KERNEL_SRC=../../../../../kernel/msm-3.18 make -j24 O=$(pwd)/../../../../../out-kernel/
+../../../../../kernel/msm-3.18/scripts/sign-file sha512 ../../../../../out-kernel/signing_key.priv ../../../../../out-kernel/signing_key.x509 wlan.ko
+cd ../../../../..
 
 
 #You can get kernel img:       out-kernel/arch/arm/boot/zImage-dtb
